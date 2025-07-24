@@ -14,11 +14,11 @@
     "module": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/app/components/*"],
+      "@components/*": ["src/app/shared/components/*"],
       "@styles/*": ["src/app/styles/*"],
-      "@interfaces/*": ["src/app/interfaces/*"],
-      "@services/*": ["src/app/services/*"],
-      "@utils/*": ["src/app/utils/*"]
+      "@models/*": ["src/app/core/interfaces/models/*"],
+      "@services/*": ["src/app/core/services/*"],
+      "@views/*": ["src/app/views/*"]
     }
   },
   "angularCompilerOptions": {
