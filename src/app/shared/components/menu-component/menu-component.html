@@ -1,4 +1,7 @@
-<nav class="flex shadow-lg" [ngClass]="{ isMobile: 'justify-end' }">
+<nav
+  class="sticky top-0 shadow-lg bg-white"
+  [ngClass]="{ isMobile: 'justify-end' }"
+>
   @if (isMobile()) {
   <div class="w-fit">
     <p-button
@@ -26,20 +29,24 @@
 @if (isMobile()) {
 <p-drawer [(visible)]="isOpen" styleClass="w-[10rem]">
   <ng-template #headless>
-    <div >
+    <div>
       <div class="flex justify-end">
         <p-button link icon="pi pi-times" (onClick)="handleDrawer()"></p-button>
       </div>
       <ul>
         @for (item of links; track $index) {
-        <li >
+        <li
+          [ngClass]="{
+            'border-b-2 border-green-600': linkActiveIndex() === $index
+          }"
+        >
           <p-button
+            link
             icon="pi pi-arrow-right"
             iconPos="right"
-            link
             styleClass="text-lg"
             [label]="item.label"
-            (onClick)="handleNavigate(item.path)"
+            (onClick)="handleNavigate(item.path, item.fragment)"
           ></p-button>
         </li>
         }

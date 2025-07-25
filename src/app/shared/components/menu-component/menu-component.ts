@@ -1,4 +1,4 @@
-import { Component, inject, effect, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,7 @@ import { ScreenSizeService } from '@services/screen-size-service';
 interface MyLinks {
   path: string;
   label: string;
+  fragment?: string;
 }
 
 @Component({
@@ -20,27 +21,32 @@ interface MyLinks {
 export class MenuComponent {
   private readonly MOBILE_BREAKPOINT = 768;
   public readonly links: MyLinks[] = [
-    { label: 'inicio', path: '' },
-    { label: 'cv', path: 'cv' },
-    { label: 'about', path: '#about' },
-    { label: 'contact', path: '#contact' },
+    { label: 'inicio', path: '/', fragment: 'home' },
+    { label: 'cv', path: '/cv' },
+    { label: 'about', path: '/', fragment: 'about' },
+    { label: 'contact', path: '/', fragment: 'contact' },
   ];
-  public isOpen = signal<boolean>(false);
 
   private screenSize = inject(ScreenSizeService);
   private navigation = inject(Navigation);
 
-
-  public currentPath = this.navigation.currentPath();
+  public isOpen = signal<boolean>(false);
+  private currentPath = this.navigation.currentUrl;
+  public linkActiveIndex = computed(() => {
+    const [url] = this.currentPath().split('#');
+    return this.links.findIndex(({ path }) => {
+      return url === path;
+    });
+  });
   private widthScreen = this.screenSize.width;
   public isMobile = computed(() => this.widthScreen() < this.MOBILE_BREAKPOINT);
-
 
   handleDrawer(): void {
     this.isOpen.update((curr) => !curr);
   }
 
-  handleNavigate(path: string) {
-    this.navigation.go(path);
+  async handleNavigate(path: string, fragment?: string) {
+    await this.navigation.go(path, { fragment });
+    this.isOpen.set(false);
   }
 }
