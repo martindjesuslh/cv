@@ -17,8 +17,10 @@
       "@components/*": ["src/app/shared/components/*"],
       "@styles/*": ["src/app/styles/*"],
       "@models/*": ["src/app/core/interfaces/models/*"],
+      "@utils/*": ["src/app/core/utils/*"],
       "@services/*": ["src/app/core/services/*"],
-      "@views/*": ["src/app/views/*"]
+      "@views/*": ["src/app/views/*"],
+      "@features/*": ["src/app/features/*"]
     }
   },
   "angularCompilerOptions": {

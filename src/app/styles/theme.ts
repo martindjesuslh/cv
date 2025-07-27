@@ -8,7 +8,7 @@ const theme = providePrimeNG({
       darkModeSelector: false || 'none',
       cssLayer: {
         name: 'primeng',
-        order: 'theme, base, primeng',
+        order: 'tailwind-base ,theme, base, primeng',
       },
     },
   },

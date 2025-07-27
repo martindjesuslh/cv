@@ -1,8 +1,5 @@
-<nav
-  class="sticky top-0 shadow-lg bg-white"
-  [ngClass]="{ isMobile: 'justify-end' }"
->
-  @if (isMobile()) {
+<nav class="sticky top-0 shadow-lg bg-white">
+  @if(isMobile()){
   <div class="w-fit">
     <p-button
       class="md:hidden"
@@ -12,10 +9,12 @@
       (onClick)="handleDrawer()"
     />
   </div>
+
   } @else {
-  <div class="w-fit">
+  <div class="w-fit flex mr-0 ml-auto">
     @for (item of links; track $index) {
     <p-button
+      [severity]="linkActiveIndex() === $index ? 'info' : 'primary'"
       variant="text"
       [label]="item.label"
       (onClick)="handleNavigate(item.path)"
@@ -35,13 +34,12 @@
       </div>
       <ul>
         @for (item of links; track $index) {
-        <li
-          [ngClass]="{
-            'border-b-2 border-green-600': linkActiveIndex() === $index
-          }"
-        >
+        <li>
+          <!-- TODO change style in case of activeIndex -->
           <p-button
-            link
+            variant="text"
+            [raised]="linkActiveIndex() === $index"
+            [severity]="linkActiveIndex() === $index ? 'info' : 'primary'"
             icon="pi pi-arrow-right"
             iconPos="right"
             styleClass="text-lg"

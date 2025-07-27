@@ -4,8 +4,8 @@ import { fromEvent, Subscription, throttleTime } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class ScreenSizeService implements OnDestroy {
   private resizeSub: Subscription;
-  public height = signal<number>(0);
-  public width = signal<number>(0);
+  public height = signal<number>(window.innerHeight);
+  public width = signal<number>(window.innerWidth);
 
   constructor() {
     this.resizeSub = fromEvent(window, 'resize')

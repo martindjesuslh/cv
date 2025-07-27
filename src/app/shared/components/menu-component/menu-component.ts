@@ -19,7 +19,7 @@ interface MyLinks {
   imports: [CommonModule, DrawerModule, ButtonModule],
 })
 export class MenuComponent {
-  private readonly MOBILE_BREAKPOINT = 768;
+  private readonly MOBILE_BREAKPOINT = 600;
   public readonly links: MyLinks[] = [
     { label: 'inicio', path: '/', fragment: 'home' },
     { label: 'cv', path: '/cv' },
@@ -39,7 +39,11 @@ export class MenuComponent {
     });
   });
   private widthScreen = this.screenSize.width;
-  public isMobile = computed(() => this.widthScreen() < this.MOBILE_BREAKPOINT);
+  public isMobile = computed(() => {
+    const isMobile = this.widthScreen() <= this.MOBILE_BREAKPOINT;
+    console.log(isMobile);
+    return isMobile;
+  });
 
   handleDrawer(): void {
     this.isOpen.update((curr) => !curr);
