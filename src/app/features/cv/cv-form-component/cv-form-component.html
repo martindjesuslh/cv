@@ -3,48 +3,10 @@
     <p-step>Contacto</p-step>
     <p-step-panel>
       <ng-template #content>
-        <section class="p-4 grid gap-4 grid-cols-1 md:grid-cols-2">
-          <fieldset class="col-span-1">
-            <app-my-input-component
-              label="Nombre completo"
-              [myControl]="masterForm.header.controls['fullName']"
-            >
-            </app-my-input-component>
-          </fieldset>
-
-          <div class="col-span-1">
-            <app-my-input-component
-              label="Dirección"
-              [myControl]="masterForm.header.controls['address']"
-            >
-            </app-my-input-component>
-          </div>
-
-          <div class="col-span-1">
-            <app-my-input-component
-              label="Correo electrónico"
-              [myControl]="masterForm.header.controls['email']"
-            >
-            </app-my-input-component>
-          </div>
-
-          <div class="col-span-1">
-            <app-my-input-component
-              label="Teléfono"
-              [myControl]="masterForm.header.controls['phone']"
-            >
-            </app-my-input-component>
-          </div>
-
-          <div class="col-span-1 md:col-span-2 flex justify-center">
-            <p-button
-              icon="pi pi-chevron-right"
-              iconPos="right"
-              label="Siguiente"
-              (onClick)="handleChangeStep()"
-            ></p-button>
-          </div>
-        </section>
+        <app-cv-form-header-component-component
+          [myForm]="masterForm.header"
+          (runChangeStep)="handleChangeStep()"
+        ></app-cv-form-header-component-component>
       </ng-template>
     </p-step-panel>
   </p-step-item>
@@ -67,7 +29,6 @@
               icon="pi pi-chevron-left"
               severity="secondary"
               label="Atrás"
-              [disabled]="masterForm.header.invalid"
               (onClick)="handleChangeStep(true)"
             ></p-button>
             <p-button
@@ -89,7 +50,7 @@
       <ng-template #content>
         <app-cv-form-key-competences-component
           [listForm]="masterForm.keyCompetencies"
-          (_runChangeStep)="handleChangeStep($event)"
+          (runChangeStep)="handleChangeStep($event)"
         ></app-cv-form-key-competences-component>
       </ng-template>
     </p-step-panel>

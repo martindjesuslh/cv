@@ -5,13 +5,13 @@ import { ConfirmationService } from 'primeng/api';
 @Component({
   selector: 'app-cv-form-key-competences-component',
   templateUrl: './cv-form-key-competences-component.html',
-  styleUrl: './cv-form-key-competences-component.css',
   standalone: false,
+  styleUrl: './cv-form-key-competences-component.css',
   providers: [ConfirmationService],
 })
 export class CvFormKeyCompetencesComponent implements OnInit {
   @Input() listForm: FormGroup[] = [];
-  @Output() private _runChangeStep = new EventEmitter<boolean | undefined>();
+  @Output() runChangeStep = new EventEmitter<boolean | undefined>();
 
   private _fb = inject(FormBuilder);
   private _confirmService = inject(ConfirmationService);
@@ -62,7 +62,7 @@ export class CvFormKeyCompetencesComponent implements OnInit {
   }
 
   handleComplete(back?: boolean) {
-    this._runChangeStep.emit(back);
+    this.runChangeStep.emit(back);
     if (!back) this._cleanFormIncomplete();
   }
 

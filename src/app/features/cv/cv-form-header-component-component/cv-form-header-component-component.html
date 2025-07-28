@@ -1,0 +1,42 @@
+<section class="p-4 grid gap-4 grid-cols-1 md:grid-cols-2">
+  <fieldset class="col-span-1">
+    <app-my-input-component
+      label="Nombre completo"
+      [myControl]="myForm.controls['fullName']"
+    >
+    </app-my-input-component>
+  </fieldset>
+
+  <div class="col-span-1">
+    <app-my-input-component
+      label="Dirección"
+      [myControl]="myForm.controls['address']"
+    >
+    </app-my-input-component>
+  </div>
+
+  <div class="col-span-1">
+    <app-my-input-component
+      label="Correo electrónico"
+      [myControl]="myForm.controls['email']"
+    >
+    </app-my-input-component>
+  </div>
+
+  <div class="col-span-1">
+    <app-my-input-component
+      label="Teléfono"
+      [myControl]="myForm.controls['phone']"
+    >
+    </app-my-input-component>
+  </div>
+
+  <div class="col-span-1 md:col-span-2 flex justify-center">
+    <p-button
+      icon="pi pi-chevron-right"
+      iconPos="right"
+      label="Siguiente"
+      (onClick)="handleComplete()"
+    ></p-button>
+  </div>
+</section>

@@ -10,11 +10,13 @@ import { SharedComponentsModule } from '../../shared/components/shared-component
 import { CvFormComponent } from './cv-form-component/cv-form-component';
 import { CvSectionComponent } from './cv-section-component/cv-section-component';
 import { CvFormKeyCompetencesComponent } from './cv-form-key-competences-component/cv-form-key-competences-component';
+import { CvFormHeaderComponentComponent } from './cv-form-header-component-component/cv-form-header-component-component';
 
 @NgModule({
   declarations: [
     CvFormComponent,
     CvSectionComponent,
+    CvFormHeaderComponentComponent,
     CvFormKeyCompetencesComponent,
   ],
   imports: [
