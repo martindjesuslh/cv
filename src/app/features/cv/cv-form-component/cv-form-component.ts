@@ -18,9 +18,10 @@ export class CvFormComponent {
       phone: ['', [V.required, V.minLength(8), V.maxLength(12)]],
     }),
     profileProfessional: this._fb.control('', [V.required, V.minLength(10)]),
+    keyCompetencies: [],
   };
 
-  public stepperActive = signal<number>(1);
+  public stepperActive = signal<number>(3);
 
   handleChangeStep(back?: boolean) {
     this.stepperActive.update((curr) => (back ? curr - 1 : curr + 1));

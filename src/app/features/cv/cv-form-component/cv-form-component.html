@@ -82,4 +82,16 @@
       </ng-template>
     </p-step-panel>
   </p-step-item>
+
+  <p-step-item [value]="3">
+    <p-step>Habilidades</p-step>
+    <p-step-panel>
+      <ng-template #content>
+        <app-cv-form-key-competences-component
+          [listForm]="masterForm.keyCompetencies"
+          (_runChangeStep)="handleChangeStep($event)"
+        ></app-cv-form-key-competences-component>
+      </ng-template>
+    </p-step-panel>
+  </p-step-item>
 </p-stepper>

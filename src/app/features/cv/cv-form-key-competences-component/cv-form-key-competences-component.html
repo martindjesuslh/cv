@@ -1,0 +1,92 @@
+<section class="p-2 md:grid grid-cols-2 gap-4">
+  @for (list of listForm; track $index; let i = $index) {
+  <div class="py-2">
+    <div class="flex justify-between animate-fadein">
+      @if(listForm.length > 1){
+      <p-button
+        severity="danger"
+        icon="pi pi-trash"
+        label="Delete list"
+        variant="outlined"
+        (onClick)="handleRemoveList(i)"
+      >
+      </p-button>
+      } @if (list.touched) {
+      <p-button
+        severity="info"
+        icon="pi pi-refresh"
+        label="Reset list"
+        variant="outlined"
+        (onClick)="handleResetList(i)"
+      >
+      </p-button>
+      }
+    </div>
+    <app-my-input-component
+      label="Title"
+      placeholder="any"
+      [myControl]="list.get('title')"
+    ></app-my-input-component>
+
+    <ul class="mb-3">
+      @for (control of getMyCompetencies(i).controls; track $index; let
+      index=$index; let last= $last) {
+      <li class="flex items-end animate-fadein">
+        <app-my-input-component
+          class="w-extend"
+          label="Competence"
+          placeholder="any"
+          [myControl]="control"
+        ></app-my-input-component>
+        @if (last) {
+        <p-button
+          class="ms-2"
+          size="large"
+          icon="pi pi-plus"
+          [disabled]="control.invalid"
+          (onClick)="handleAddCompetencies(i)"
+        ></p-button>
+        }@else {
+
+        <p-button
+          severity="danger"
+          icon="pi pi-trash"
+          class="ms-2"
+          size="large"
+          (onClick)="handleRemoveCompetencies(i, index)"
+        ></p-button>
+        }
+      </li>
+      }
+    </ul>
+  </div>
+  }
+
+  <div class="col-span-2 flex mb-4">
+    <p-button
+      severity="info"
+      label="Agregar"
+      icon="pi pi-plus"
+      [disabled]="listForm[listForm.length - 1].invalid"
+      (onClick)="handleAddList()"
+    >
+    </p-button>
+  </div>
+  <div class="col-span-2 flex justify-center">
+    <p-button
+      icon="pi pi-chevron-left"
+      class="mr-4"
+      severity="secondary"
+      label="Atrás"
+      (onClick)="handleComplete(true)"
+    ></p-button>
+    <p-button
+      icon="pi pi-chevron-right"
+      iconPos="right"
+      label="Siguiente"
+      [disabled]="listForm[0].invalid"
+      (onClick)="handleComplete()"
+    ></p-button>
+  </div>
+</section>
+<p-confirmdialog />
