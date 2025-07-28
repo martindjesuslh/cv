@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, Validators as V } from '@angular/forms';
 
 @Component({
@@ -17,7 +17,14 @@ export class CvFormComponent {
       email: ['', [V.required, V.email]],
       phone: ['', [V.required, V.minLength(8), V.maxLength(12)]],
     }),
+    profileProfessional: this._fb.control('', [V.required, V.minLength(10)]),
   };
+
+  public stepperActive = signal<number>(1);
+
+  handleChangeStep(back?: boolean) {
+    this.stepperActive.update((curr) => (back ? curr - 1 : curr + 1));
+  }
 
   handleSubmit() {
     const payload = this._buildPayload();
