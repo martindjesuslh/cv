@@ -11,6 +11,7 @@ import { CvFormComponent } from './cv-form-component/cv-form-component';
 import { CvSectionComponent } from './cv-section-component/cv-section-component';
 import { CvFormKeyCompetencesComponent } from './cv-form-key-competences-component/cv-form-key-competences-component';
 import { CvFormHeaderComponentComponent } from './cv-form-header-component-component/cv-form-header-component-component';
+import { CvFormWorkExperienceComponent } from './cv-form-work-experience-component/cv-form-work-experience-component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CvFormHeaderComponentComponent } from './cv-form-header-component-compo
     CvSectionComponent,
     CvFormHeaderComponentComponent,
     CvFormKeyCompetencesComponent,
+    CvFormWorkExperienceComponent,
   ],
   imports: [
     CommonModule,

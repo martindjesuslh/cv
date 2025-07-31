@@ -7,6 +7,7 @@ const ERROR_MESSAGES = {
   maxlength: (length: number) => `Cannot exceed ${length} characters.`,
   min: (value: number) => `Value must be greater than or equal to ${value}.`,
   max: (value: number) => `Value must be less than or equal to ${value}.`,
+  range: 'Range is invalid',
   pattern: 'The entered format is invalid.',
 };
 
@@ -34,6 +35,8 @@ export const getErrorMessage = (control: AbstractControl | null) => {
 
   if (control.errors['max'])
     return ERROR_MESSAGES.max(control.errors['max']?.max);
+
+  if (control.errors['range']) return ERROR_MESSAGES.range;
 
   return null;
 };

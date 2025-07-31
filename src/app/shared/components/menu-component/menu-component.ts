@@ -39,11 +39,9 @@ export class MenuComponent {
     });
   });
   private widthScreen = this.screenSize.width;
-  public isMobile = computed(() => {
-    const isMobile = this.widthScreen() <= this.MOBILE_BREAKPOINT;
-    console.log(isMobile);
-    return isMobile;
-  });
+  public isMobile = computed(
+    () => this.widthScreen() <= this.MOBILE_BREAKPOINT
+  );
 
   handleDrawer(): void {
     this.isOpen.update((curr) => !curr);

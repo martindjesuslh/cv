@@ -45,6 +45,15 @@
   </p-step-item>
 
   <p-step-item [value]="3">
+    <p-step>Experiencia profesional</p-step>
+    <p-step-panel>
+      <ng-template #content>
+        <app-cv-form-work-experience-component></app-cv-form-work-experience-component>
+      </ng-template>
+    </p-step-panel>
+  </p-step-item>
+
+  <p-step-item [value]="4">
     <p-step>Habilidades</p-step>
     <p-step-panel>
       <ng-template #content>

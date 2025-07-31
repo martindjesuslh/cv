@@ -1,0 +1,9 @@
+@for (item of listForm; track $index) {
+<app-my-date-component
+  label="Fechas"
+  dateFormat="mm/yy"
+  view="month"
+  [range]="true"
+  [myControl]="item.controls['date']"
+></app-my-date-component>
+}
