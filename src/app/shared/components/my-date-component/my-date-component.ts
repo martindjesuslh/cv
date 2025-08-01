@@ -18,7 +18,7 @@ export class MyDateComponent implements OnInit {
     return this.myControl as FormControl;
   }
   @Input() view: DatePicker['view'] = 'date';
-  @Input() dateFormat: DatePicker['dateFormat'] = 'dd/mm/yy';
+  @Input() dateFormat: DateFormat = 'dd/mm/yy';
   @Input() range?: boolean;
   @Input() label: string = '';
   @Input() placeholder: string = '';
@@ -29,12 +29,24 @@ export class MyDateComponent implements OnInit {
 
   @ViewChild('myDateEnd') private myDatePicker!: DatePicker;
 
-  ngOnInit(): void {
-    this._updateRange(); //FIXME the sincronize dates
+  get errorMessage(): string | null {
+    return getErrorMessage(this.myControl);
   }
 
-  private _updateRange() {
+  get className() {
+    return this.myControl?.invalid && this.myControl.touched
+      ? 'ng-invalid ng-dirty'
+      : '';
+  }
+
+  ngOnInit(): void {
+    this._updateLocalControls();
+  }
+
+  private _updateLocalControls() {
     const [startIso, endIso] = this.myControl?.value;
+
+    if (!startIso || !endIso) return;
 
     const start = this._formatDateForControl(startIso);
     const end = this._formatDateForControl(endIso);
@@ -57,16 +69,6 @@ export class MyDateComponent implements OnInit {
     }
   }
 
-  get errorMessage(): string | null {
-    return getErrorMessage(this.myControl);
-  }
-
-  get className() {
-    return this.myControl?.invalid && this.myControl.touched
-      ? 'ng-invalid ng-dirty'
-      : '';
-  }
-
   handleChangeStart() {
     if (this.dateStart.invalid) return;
 
@@ -80,25 +82,26 @@ export class MyDateComponent implements OnInit {
     const start = this._dateParse(`${this.dateStart.value}`);
     const end = this._dateParse(`${this.dateEnd.value}`);
 
-    if (start > end) {
-      this.myControl?.setErrors({ range: true });
-      this._updateControl();
-    } else this.myControl?.setErrors(null);
+    if (start < end) {
+      this.myControl?.setErrors(null);
+      this._updateMyControl();
+    } else this.myControl?.setErrors({ range: true });
 
     this.myControl?.markAsTouched();
   }
 
-  private _updateControl() {
+  private _updateMyControl() {
     const start = this._dateParse(`${this.dateStart.value}`).toISOString();
     const end = this._dateParse(`${this.dateEnd.value}`).toISOString();
 
-    this.myControl?.setValue([start, end]);
+    this.myControl?.patchValue([start, end]);
   }
 
   private _dateParse(value: string) {
     let date = value;
     if (this.view !== 'date') date = `01/${value}`;
 
+    console.log(date);
     return new Date(date);
   }
 
