@@ -1,5 +1,6 @@
-import { NgModule, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core'; //prettier-ignore
+import { NgModule, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection, LOCALE_ID } from '@angular/core'; //prettier-ignore
 import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
 //base
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
@@ -7,6 +8,9 @@ import { App } from './app';
 import theme from '@styles/theme';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { MenuComponent } from './shared/components/menu-component/menu-component';
+import localeEs from '@angular/common/locales/es';
+
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [App],
@@ -17,6 +21,7 @@ import { MenuComponent } from './shared/components/menu-component/menu-component
     provideAnimations(),
     ScreenOrientation,
     theme,
+    { provide: LOCALE_ID, useValue: 'es' },
   ],
   bootstrap: [App],
 })
